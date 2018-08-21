@@ -2,11 +2,13 @@
 #include <time.h>
 #define MAX 40
 
+void playcard(int *, int *);
+
 main() {
-	int CARDS[MAX], SEEDS[MAX], cards1[MAX], seeds1[MAX/2], cards2[MAX], seeds2[MAX/2];
+	int CARDS[MAX], SEEDS[MAX], cards1[MAX], cards2[MAX];
     int seed;
-	int i, y, z, x, X, e, END=1;
-    int count, POINTS, TABLE[MAX];
+	int i, y, z, x, X, e;                     /*z tiene conto del numero di carte sul Tavolo*/
+    int count=1, POINTS, TABLE[MAX], WINNER;    /*count tiene il segno dell'ultimo giocatore che ha giocato*/
 
     seed = time(0);
     srand(seed);
@@ -26,61 +28,49 @@ main() {
             SEEDS[i] = x;
             if (i < 20) {
                 cards1[i] = CARDS[i];
-                seeds1[i] = SEEDS[i];
             } else {
                 cards2[i-20] = CARDS[i];
-                seeds2[i-20] = SEEDS[i];
             }
         }
     }
-    
-    int Index=0;
 
-    for (i=0; i < 1; i++) {
-
-        if (i%2+1==1) {Index=1; i--;} else if (i%2+1==2) {Index=2; i--;}        /*Assegna Indici*/ /*controllo del ciclo tramite i*/
-
-        if (Index==1) {y = cards1[0];} else {y=cards2[0];}                      /*prende la carta*/
-
-        if (y>4 || y==0) {
-
-            TABLE[i] = y; 
-            if (Index==1) {
-                for (z=0; z < MAX; z++) { cards1[z] = cards1[z+1]; }
-            } else { 
-                for (z=0; z < MAX; z++) { cards2[z] = cards2[z+1]; }
-            }
-
-        } else if (y=1) {
-
-            if (Index==1) {      /*Player 1*/
-
-                if (cards2[0] != 1 || cards2[
-
-            } else {            /*Player 2*/
-
-            }
-
-        } else if (y=2) {
-
-            if (Index-1) {      /*Player 2*/
-
-
-            } else {            /*Player 1*/
-
-            }
-
-        } else if (y=3) {
-
-            if (Index-1) {      /*Player 2*/
-
-
-            } else {            /*Player 1*/
-
-            }
-
+    while (count) {
+        if (count==1) {
+            playcard(cards1, TABLE);
+            z++;
+            count = 2;
+        } else if (count==2) {
+            playcard(cards2, TABLE);
+            z++;
+            count = 1;
         }
-
+        if (control(TABLE[z])) {
+            extract(control(TABLE[z], cards1, TABLE))
+        }
     }
+}
 
+void extract(int n, int cards[], int TABLE[]) {
+    int i;
+    for (i=0; i<n; i++) {
+        if (cards[i] != 1 && cards[i] != 2 && cards[i] != 3) {TABLE}
+    }
+}
+
+int control(int TABLE) {
+    if (TABLE > 3 || TABLE = 0) return 0;
+    else if (TABLE == 1) return 1;
+    else if (TABLE == 2) return 2;
+    else if (TABLE == 3) return 3;
+}
+
+void playcard(int cards[], int TABLE[]) {
+    int i, y;
+    for (i=0; i<MAX; i++) {
+        if (!TABLE[i]) {
+            TABLE[i] = cards[0];
+            for (y=0; y<MAX; y++) cards[y] = cards[y+1];
+            break;
+        }
+    }
 }
