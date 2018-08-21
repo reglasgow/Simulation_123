@@ -3,10 +3,10 @@
 #define MAX 40
 
 main() {
-	int CARDS[MAX], SEEDS[MAX], cards1[MAX/2], seeds1[MAX/2], cards2[MAX/2], seeds2[MAX/2];
+	int CARDS[MAX], SEEDS[MAX], cards1[MAX], seeds1[MAX/2], cards2[MAX], seeds2[MAX/2];
     int seed;
-	int i, y, x, X, e, END=1;
-    int COUNT, TABLEC[MAX], TABLES[MAX];
+	int i, y, z, x, X, e, END=1;
+    int count, POINTS, TABLE[MAX];
 
     seed = time(0);
     srand(seed);
@@ -34,10 +34,53 @@ main() {
         }
     }
     
-    while (END) {
-        for (i=0; i<MAX; i++) {
-            
+    int Index=0;
+
+    for (i=0; i < 1; i++) {
+
+        if (i%2+1==1) {Index=1; i--;} else if (i%2+1==2) {Index=2; i--;}        /*Assegna Indici*/ /*controllo del ciclo tramite i*/
+
+        if (Index==1) {y = cards1[0];} else {y=cards2[0];}                      /*prende la carta*/
+
+        if (y>4 || y==0) {
+
+            TABLE[i] = y; 
+            if (Index==1) {
+                for (z=0; z < MAX; z++) { cards1[z] = cards1[z+1]; }
+            } else { 
+                for (z=0; z < MAX; z++) { cards2[z] = cards2[z+1]; }
+            }
+
+        } else if (y=1) {
+
+            if (Index==1) {      /*Player 1*/
+
+                if (cards2[0] != 1 || cards2[
+
+            } else {            /*Player 2*/
+
+            }
+
+        } else if (y=2) {
+
+            if (Index-1) {      /*Player 2*/
+
+
+            } else {            /*Player 1*/
+
+            }
+
+        } else if (y=3) {
+
+            if (Index-1) {      /*Player 2*/
+
+
+            } else {            /*Player 1*/
+
+            }
+
         }
+
     }
 
 }
